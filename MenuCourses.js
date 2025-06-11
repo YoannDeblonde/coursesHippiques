@@ -1,0 +1,116 @@
+function main() {
+
+console.log("main appelé")
+
+let deconnexion = document.getElementById("SaveAndQuitBut")
+    if (deconnexion) {
+        deconnexion.addEventListener("click", function (event) {
+            event.preventDefault();
+            console.log("test lancement");
+            deconnexionJoueur();
+    });
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+    let id = sessionStorage.getItem("id");
+    let pseudo = sessionStorage.getItem("pseudo");
+    let messageBienvenue = sessionStorage.getItem("messageBienvenue");
+
+    if (!id || !pseudo) {
+        afficherPopupErreur("Veuillez vous connecter d'abord.");
+        window.location.href = "Connexion.html";
+    }
+    else if (!messageBienvenue) {
+        afficherPopupBienvenue(pseudo);
+        sessionStorage.setItem("messageBienvenue", "true");
+    }
+});
+
+let info = document.getElementById("InfoBut")
+    if (info) {
+        info.addEventListener("click", function (event) {
+            event.preventDefault();
+            enTravaux();
+    });
+    }
+
+let distributeur = document.getElementById("DistributeurBut")
+    if (distributeur) {
+        distributeur.addEventListener("click", function (event) {
+            event.preventDefault();
+            enTravaux();
+    });
+    }
+
+let bar = document.getElementById("BarBut")
+    if (bar) {
+        bar.addEventListener("click", function (event) {
+            event.preventDefault();
+            enTravaux();
+    });
+    }
+
+let stats = document.getElementById("StatsBut")
+    if (stats) {
+        stats.addEventListener("click", function (event) {
+            event.preventDefault();
+            enTravaux();
+    });
+    }
+
+        
+}
+
+function deconnexionJoueur() {
+
+sessionStorage.clear();
+window.location.href = "Accueil.html"; 
+}
+
+function enTravaux() {
+alert("en travaux !");
+}
+
+function afficherPopupBienvenue(pseudo) {
+    const popup = document.getElementById("popupBienvenue");
+    const messageDiv = document.getElementById("messageBienvenuePopup");
+    const boutonFermer = document.getElementById("fermerBienvenue");
+
+    messageDiv.textContent = "Bienvenue " + pseudo + " !";
+    popup.style.display = "block";
+
+    setTimeout(() => {
+        popup.style.display = "none";
+    }, 4000);
+
+    boutonFermer.onclick = function () {
+        popup.style.display = "none";
+    };
+}
+
+function afficherPopupErreur(message) {
+    const popup = document.getElementById("popupErreur");
+    const messageElem = document.getElementById("messageErreurPopup");
+    const contenu = popup.querySelector(".popup-contenu"); // <-- ici, très important !
+
+    messageElem.textContent = message;
+    popup.style.display = "block";
+
+    document.getElementById("fermerErreur").onclick = () => {
+        popup.style.display = "none";
+        window.location.href = "Connexion.html";
+    };
+
+
+    setTimeout(() => {
+        popup.style.display = "none";
+        window.location.href = "Connexion.html";
+    }, 4000);
+}
+
+
+
+main();
+
+
+

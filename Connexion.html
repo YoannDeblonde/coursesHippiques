@@ -12,11 +12,11 @@
     <div id="titleScreen">Inscription / Connexion</div>
 
     <section id="connexionForm">
-      <form method="post" enctype="text/plain" class="contact-form">
-        <input type="text" name="username" placeholder="Votre pseudo" required />
-        <input type="password" name="password" placeholder="Votre password" required />
-        <button type="submit">Envoyer</button>
-      </form>
+<form id="formConnexion" class="contact-form">
+  <input type="text" name="username" placeholder="Votre pseudo" required />
+  <input type="password" name="password" placeholder="Votre password" required />
+  <button type="submit">Envoyer</button>
+</form>
     </section>
 
 	<div id="Navigation">
@@ -24,7 +24,13 @@
             <a href="Accueil.html" title="Accueil"><button id="retourBut"> Retour </button></a>
 	</div>
 
+<div id="popupErreur" class="popup-erreur">
+  <div class="popup-contenu">
+    <span id="fermerPopup" class="fermer">&times;</span>
+    <p id="messageErreurPopup">Message d'erreur</p>
+  </div>
+</div>
 
-    <script src="coursesHippiques.js"></script>
+    <script src="Connexion.js"></script>
 </body>
 </html>
