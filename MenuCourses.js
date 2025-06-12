@@ -30,7 +30,7 @@ let info = document.getElementById("InfoBut")
     if (info) {
         info.addEventListener("click", function (event) {
             event.preventDefault();
-            enTravaux();
+            afficherProfil();
     });
     }
 
@@ -54,12 +54,95 @@ let stats = document.getElementById("StatsBut")
     if (stats) {
         stats.addEventListener("click", function (event) {
             event.preventDefault();
-            enTravaux();
+            afficherStats();
     });
     }
-
-        
+   
 }
+
+function afficherStats() {
+    let id = sessionStorage.getItem("id");
+    if (!id) {
+        alert("Aucun ID de joueur trouvé !");
+        return;
+    }
+
+    fetch("http://localhost:8080/courses/hippiques/joueur/affichageprofil", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({id})
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("Erreur serveur : " + res.status);
+        return res.json();
+    })
+    .then(data => {
+        console.log(data);
+
+        const contenu = document.getElementById("contenuProfil");
+        contenu.innerHTML = `
+            <h3>Pseudo : ${data.username}</h3>
+            <p><strong>Gains générés :</strong> ${data.gainsGeneres} €</p>
+            <p><strong>Nombre de parties jouées :</strong> ${data.nbPartiesJouees}</p>
+            <p><strong>Nombre de parties gagnées :</strong> ${data.nbPartiesGagnees}</p>
+        `;
+
+        document.getElementById("popupProfil").style.display = "flex";
+    })
+    .catch(err => {
+        console.error("Erreur connexion :", err.message);
+        alert("Erreur lors du chargement du profil.");
+    });
+}
+
+// Fermer le popup
+document.getElementById("fermerProfil").addEventListener("click", () => {
+    document.getElementById("popupProfil").style.display = "none";
+});
+
+
+
+function afficherProfil() {
+    let id = sessionStorage.getItem("id");
+    if (!id) {
+        alert("Aucun ID de joueur trouvé !");
+        return;
+    }
+
+    fetch("http://localhost:8080/courses/hippiques/joueur/affichageprofil", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({id})
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("Erreur serveur : " + res.status);
+        return res.json();
+    })
+    .then(data => {
+        console.log(data);
+
+        const contenu = document.getElementById("contenuProfil");
+        contenu.innerHTML = `
+            <h3>Pseudo : ${data.username}</h3>
+            <p><strong>Argent disponible :</strong> ${data.argent} €</p>
+        `;
+
+        document.getElementById("popupProfil").style.display = "flex";
+    })
+    .catch(err => {
+        console.error("Erreur connexion :", err.message);
+        alert("Erreur lors du chargement du profil.");
+    });
+}
+
+// Fermer le popup
+document.getElementById("fermerProfil").addEventListener("click", () => {
+    document.getElementById("popupProfil").style.display = "none";
+});
+
+
+
+
 
 function deconnexionJoueur() {
 

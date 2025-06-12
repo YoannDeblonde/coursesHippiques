@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FDJ-Connexion</title>
+    <link rel="icon" type="image/jpg" href=".png">
+    <link rel="stylesheet" type="text/css" href="coursesHippiques.css">
+</head>
+<body>
+
+    <div id="titleScreen">Changement de username</div>
+
+    <section id="connexionForm">
+<form id="formModifPseudo" class="contact-form">
+  <input type="text" name="username" placeholder="Ancien username" required />
+  <input type="text" name="newUsername" placeholder="Nouveau username" required />
+  <input type="password" name="password" placeholder="Password" required />
+  <button type="submit">Envoyer</button>
+</form>
+    </section>
+
+	<div id="Navigation">
+        <div id="retour">
+            <a href="ModifProfile.html" title="Accueil"><button id="retourBut"> Retour </button></a>
+	</div>
+
+<div id="popupErreur" class="popup-erreur">
+  <div class="popup-contenu">
+    <span id="fermerPopup" class="fermer">&times;</span>
+    <p id="messageErreurPopup">Message d'erreur</p>
+  </div>
+</div>
+
+    <div id="popupConnection" class="popup-success">
+  <div class="popup-contenu">
+    <span id="popupConnection" class="fermer">&times;</span>
+    <p id="messagePopup">Bienvenue !</p>
+  </div>
+</div>
+
+    <script src="ModifPseudo.js"></script>
+</body>
+</html>

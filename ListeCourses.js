@@ -1,13 +1,53 @@
+let coursesData = []; 
+
 function main() {
      console.log("truc");
   afficherCourses();
   console.log("main appelé");
+
+const bouton1 = document.getElementById("Course1But");
+    if (bouton1) {
+        bouton1.addEventListener("click", function(event) {
+            event.preventDefault();
+            choisirCourse(0);
+        });
+    }
+
+const bouton2 = document.getElementById("Course2But");
+    if (bouton2) {
+        bouton2.addEventListener("click", function(event) {
+            event.preventDefault();
+            choisirCourse(1);
+        });
+    }
+
+const bouton3 = document.getElementById("Course3But");
+    if (bouton3) {
+        bouton3.addEventListener("click", function(event) {
+            event.preventDefault();
+            choisirCourse(2);
+        });
+    }
+
 }
+
+function choisirCourse(index) {
+    if (!coursesData || !coursesData[index]) {
+        console.error("Données de course non disponibles pour l'index", index);
+        return;
+    }
+    const idCourse = coursesData[index].id;
+    sessionStorage.setItem("idCourse", idCourse);
+    console.log(`Course sélectionnée : idCourse = ${idCourse}`);
+    window.location.href = "Paris.html";
+}
+
 
 function afficherCourses() {
   fetch("http://localhost:8080/courses/hippiques/course/creerListeCourses")
     .then(res => res.json())
     .then(data => {
+      coursesData = data;
       console.log(data);
 
       for (let i = 0; i < 3; i++) {
@@ -28,7 +68,7 @@ header.innerHTML = `
 `;
 infosDiv.appendChild(header);
 
-        // Liste des chevaux
+    // Liste des chevaux
 course.listeCheval.forEach(cheval => {
   const chevalDiv = document.createElement("div");
   chevalDiv.className = "cheval-card";

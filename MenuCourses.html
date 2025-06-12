@@ -9,8 +9,9 @@
 <header>
 
     <div id="ModifProfile">
-            <button id="ModifProfileBut"> Profile </button>
-	</div>
+            <a href="ModifProfile.html" title="Profil"><button id="ModifProfileBut"> Modifier Profil </button></a>
+	  </div>
+    
 
   	<div id="SaveAndQuit">
             <button id="SaveAndQuitBut"> Sauvegarder et Quitter </button>
@@ -74,6 +75,12 @@
   </div>
 </div>
 
+<div id="popupProfil" class="popup-profil" style="display:none;">
+  <div class="popup-contenu">
+    <span id="fermerProfil" class="fermer">&times;</span>
+    <div id="contenuProfil"></div>
+  </div>
+</div>
 
     <script src="MenuCourses.js"></script>
 
