@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="pageCourse.css">
+</head>
+<body>
+    <div id="titre">Exemple de titre</div>
+    <div class="premierBloc">
+        <div id="infoCourse">
+            <h4>Information Course</h4>
+            <ul>
+                <li><strong>Météo :</strong> <span id="meteo"></span> </li>
+                <li><strong>Nombre de tours :</strong> <span id="nbTour">0</span> </li>
+                <li><strong>Longueur d'un tour :</strong> <span id="longueur">0</span> </li>
+                <li><strong>Cheval avec la meilleure Vmax :</strong>
+                    <span id="nomChevalVmax">d</span> 
+                    <span id="chevalVmax">0</span> km/h
+                </li>
+                <li><strong>Cheval avec la meilleure Acceleration :</strong>
+                    <span id="nomChevalAcceleration">d</span> 
+                    <span id="chevalAcceleration">0</span>
+                </li>
+                <li><strong>Cheval qui a remporté le plus de course :</strong>
+                    <span id="nomChevalVictoire">Aucun</span> 
+                    <span id="chevalVictoire">0</span> 
+                </li>
+                <li><strong>Type de terrain :</strong> <span id="typeDeTerrain"></span> </li>
+            </ul>
+            <button id="lancementCourse" >Lancer Course</button>
+        </div>
+        
+        <div id="course" style="transform: scale(0.9); transform-origin: top left;">
+            <div class = "ARRIVEE" id="ligneArrivee"></div>
+            <div id="affichageCourse" ></div>
+        </div>
+        <div class="deuxiemeBloc">
+            <div id="affichageClassement"><h4>Classement</h4></div> 
+            <div id="resultatCourse" style="display:none;"><h4> </h4></div>
+        </div>
+    </div>
+    <div id="popupFinCourse" class="popup-finCourse" style="display:none;">
+        <div class="popup-contenu">
+            <span id="fermerFinCourse" class="fermer">&times;</span>
+            <div id="contenuFinCourse"></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="pageCourse.js"></script>
+</body>
+</html>
