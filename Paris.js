@@ -40,7 +40,7 @@ function recuperationPari(event) {
     })
     .then(data => {
         console.log("Pari sauvegardé !", data);
-        window.location.href = "";
+        window.location.href = "pageCourse.html";
 
     })
     .catch(err => console.error("Erreur connexion :", err.message));
