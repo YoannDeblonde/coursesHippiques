@@ -1,7 +1,5 @@
-
-let idCourse = 5;
-//let idJoueur = sessionStorage.getItem("id");
-let idJoueur = 1;
+let idCourse = sessionStorage.getItem("idCourse");
+let idJoueur = sessionStorage.getItem("id");
 let joueur;
 let pari;
 let podium;
@@ -22,44 +20,44 @@ let linkLongueur = document.getElementById("longueur");
 let linkChevalVmax = document.getElementById("chevalVmax");
 let linkNomChevalVmax = document.getElementById("nomChevalVmax");
 
-let linkChevalVictoire = document.getElementById("chevalVictoire");
-let linkNomChevalVictoire = document.getElementById("nomChevalVictoire");
-
 let linkChevalAcceleration = document.getElementById("chevalAcceleration");
 let linkNomChevalAcceleration= document.getElementById("nomChevalAcceleration");
 
 let linkTypeDeTerrain = document.getElementById("typeDeTerrain");
 
-fetch("http://localhost:8080/courses/hippiques/course/testCourse",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"
-    },
-    body: JSON.stringify(idCourse)
-})
-    .then(res => res.json())
-    .then(data => {recupererDonneesChevaux(data)})
-    .catch(err => console.log(err));
+async function lancerFetchsEnOrdre(idCourse, idJoueur) {
+  try {
+    // 1. Premier fetch : Course Test
+    const resCourse = await fetch("http://localhost:8080/courses/hippiques/course/testCourse", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(idCourse)
+    });
+    const dataCourse = await resCourse.json();
+    recupererDonneesChevaux(dataCourse);
 
-fetch("http://localhost:8080/courses/hippiques/joueur/affichageprofil2",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"
-    },
-    body: JSON.stringify(idJoueur)
-})
-    .then(res => res.json())
-    .then(data => {recupererJoueur(data)})
-    .catch(err => console.log(err));
+    // 2. Deuxième fetch : Profil Joueur
+    const resJoueur = await fetch("http://localhost:8080/courses/hippiques/joueur/affichageprofil2", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(idJoueur)
+    });
+    const dataJoueur = await resJoueur.json();
+    recupererJoueur(dataJoueur);
 
-fetch("http://localhost:8080/courses/hippiques/course/podium",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"
-    },
-    body: JSON.stringify(idCourse)
-})
-    .then(res => res.json())
-    .then(data => {recupererPodium(data)})
-    .catch(err => console.log(err));
+    // 3. Troisième fetch : Podium
+    const resPodium = await fetch("http://localhost:8080/courses/hippiques/course/podium", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(idCourse)
+    });
+    const dataPodium = await resPodium.json();
+    recupererPodium(dataPodium);
 
+  } catch (err) {
+    console.error("Erreur lors des fetchs :", err);
+  }
+}
 function recupererJoueur(data){
     joueur = data;
     pari = data["pari"];
@@ -67,6 +65,8 @@ function recupererJoueur(data){
 function recupererPodium(data){
     podium = data;
 }
+
+lancerFetchsEnOrdre(idCourse, idJoueur);
 
 let nbChevauxFinis = 0;
 let nbParticipants;
@@ -133,11 +133,6 @@ function course(data,initialisation){
             linkChevalAcceleration.innerHTML = data["listeCheval"][i]["acceleration"].toFixed(2);
         }
 
-        if (data["listeCheval"][i]["nbCourseGagnees"] > linkChevalVictoire.innerHTML ){
-            linkNomChevalVictoire.innerHTML = nom;
-            linkChevalVictoire.innerHTML = data["listeCheval"][i]["nbCourseGagnees"];
-        }
-
         if (initialisation){
             majCheval(document.getElementById(cheval),tempsRealise,0);
         }
@@ -167,20 +162,23 @@ function finDeLaCourse(){
     joueur["nbPartiesJouees"]+=1;
     linkContenuFinCourse.innerHTML=linkAffichageClassement.innerHTML;
 
+
     let idChevalPari = pari["chevalChoisi"][0]["idCheval"];
     //Pari bon
     if (podium[0]["idCheval"] === idChevalPari){
-        linkContenuFinCourse.innerHTML += "\n Bravo vous avez remporté votre pari";
         joueur["argent"] += pari["mise"]*podium[0]["cote"];
         joueur["nbPartiesGagnees"] += 1;
-        joueur["gainsGeneres"] = pari["mise"]*podium[0]["cote"]; 
+        joueur["gainsGeneres"] += pari["mise"]*(podium[0]["cote"]-1); 
+
+        linkContenuFinCourse.innerHTML += "\n Bravo vous avez remporté votre pari ! <br>Votre cagnote s'eleve maintenant à " +  joueur["argent"].toFixed(2) +" euros/jetons/cequetuveux";
     }
     //Pari mauvais
     else {
-        linkContenuFinCourse.innerHTML += "\n Perdu ! Vous pouvez toujours recommencer... (Tous les gagnants ont déjà joués)";
+        linkContenuFinCourse.innerHTML += "\n Perdu ! Vous pouvez toujours recommencer... (Tous les perdants s'arretent avant de gagner)";
     }
     majJoueur(joueur);
     document.getElementById("popupFinCourse").style.display = "block";
+    document.getElementById("retour").style.display = "block";
 
 
     document.getElementById("fermerFinCourse").addEventListener("click", function() {
@@ -223,4 +221,3 @@ linkBoutonCourse.addEventListener("click",function(){
     linkAffichageClassement.innerHTML = "<h4>Classement</h4>";
     course(dataStock,false);
 });
-//,{once: true,}
