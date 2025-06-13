@@ -15,7 +15,7 @@ function actualisationClassement () {
             data.forEach((joueur, index) => {
                 console.log(data);
                 const liListeJoueur = document.createElement("li");
-                liListeJoueur.textContent = `${index + 1}e joueur : ${joueur.username}`;
+                liListeJoueur.textContent = `${index + 1}e joueur : ${joueur.username ?? "Inconnu"} - Parties gagnées : ${joueur.nbPartiesGagnees}`;
                 olTop3Joeurs.appendChild(liListeJoueur);
             });
         })
