@@ -74,7 +74,7 @@ course.listeCheval.forEach(cheval => {
   chevalDiv.className = "cheval-card";
   chevalDiv.innerHTML = `
     <p>🐎 <strong>${cheval.nom}</strong> <em>(${cheval.race})</em></p>
-    <p>Courses gagnées : <strong>${cheval.nbCourseGagnees}</strong> | Cote : <strong>${cheval.cote}</strong></p>
+    <p>Courses gagnées : <strong>${cheval.nbCourseGagnees}</strong> | Cote : <strong>${cheval.cote.toFixed(2)}</strong></p>
   `;
   infosDiv.appendChild(chevalDiv);
 });

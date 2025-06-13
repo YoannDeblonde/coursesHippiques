@@ -21,10 +21,6 @@
                     <span id="nomChevalAcceleration">d</span> 
                     <span id="chevalAcceleration">0</span>
                 </li>
-                <li><strong>Cheval qui a remporté le plus de course :</strong>
-                    <span id="nomChevalVictoire">Aucun</span> 
-                    <span id="chevalVictoire">0</span> 
-                </li>
                 <li><strong>Type de terrain :</strong> <span id="typeDeTerrain"></span> </li>
             </ul>
             <button id="lancementCourse" >Lancer Course</button>
@@ -37,6 +33,10 @@
         <div class="deuxiemeBloc">
             <div id="affichageClassement"><h4>Classement</h4></div> 
             <div id="resultatCourse" style="display:none;"><h4> </h4></div>
+            <div id="Navigation">
+            <div id="retour" style="display:none;">
+                <a href="MenuCourses.html" title="Accueil"><button id="retourBut"> Retour </button></a>
+	        </div>
         </div>
     </div>
     <div id="popupFinCourse" class="popup-finCourse" style="display:none;">
@@ -45,6 +45,8 @@
             <div id="contenuFinCourse"></div>
         </div>
     </div>
+
+
     <script type="text/javascript" src="pageCourse.js"></script>
 </body>
 </html>
