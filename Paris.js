@@ -78,18 +78,8 @@ function recuperationPari(event) {
             }
 
         }
-<<<<<<< HEAD
         return res.text();
-    })
-    .then(data => {
-        console.log("Pari sauvegardé !", data);
-        window.location.href = "pageCourse.html";
-
-    })
-    .catch(err => console.error("Erreur connexion :", err.message));
-=======
     }
->>>>>>> 87b8fce8920f6548a2482facab00f854913e9389
 }
 
 main();
