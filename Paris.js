@@ -56,12 +56,14 @@ function recuperationPari(event) {
 
             let idChevaux = c.value;
             let mise = form.elements["mise"].value; 
+            let pariSimple = "SIMPLE";
+            console.log(id);
 
             if (mise<=argent){
                 fetch("http://localhost:8080/courses/hippiques/main/initPariAvecIdJoueur/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ "idJoueur":id, "mise":mise, "idChevaux":[idChevaux] })
+                body: JSON.stringify({ "idJoueur":id, "mise":mise,"typePari":pariSimple, "idChevaux":[idChevaux] })
                 })
                 .then(res => {
                     if (!res.ok) {
@@ -76,9 +78,7 @@ function recuperationPari(event) {
                 })
                 .catch(err => console.error("Erreur connexion :", err.message));
             }
-
         }
-        return res.text();
     }
 }
 
