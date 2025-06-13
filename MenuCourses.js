@@ -11,6 +11,13 @@ let deconnexion = document.getElementById("SaveAndQuitBut")
     });
     }
 
+    let parisSimple = document.getElementById("ParisSimpleBut")
+    if (parisSimple) {
+        parisSimple.addEventListener("click", function () {
+             sessionStorage.setItem("Type de paris", "SIMPLE");
+    });
+    }
+
     window.addEventListener("DOMContentLoaded", () => {
     let id = sessionStorage.getItem("id");
     let pseudo = sessionStorage.getItem("pseudo");
