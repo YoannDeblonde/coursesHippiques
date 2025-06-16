@@ -154,6 +154,95 @@ function course(data,initialisation){
 }
 
 function finDeLaCourse(){
+    joueur["nbPartiesJouees"] += 1;
+    linkContenuFinCourse.innerHTML = linkAffichageClassement.innerHTML;
+
+    const typePari = pari["typePari"];
+    const chevauxChoisis = pari["chevalChoisi"].map(c => c["idCheval"]);
+    const mise = pari["mise"];
+    let pariGagne = false;
+    let gains = 0;
+
+    switch(typePari) {
+        case "SIMPLE":
+            if (podium[0]["idCheval"] === chevauxChoisis[0]) {
+                gains = mise * podium[0]["cote"];
+                pariGagne = true;
+            }
+            break;
+
+        case "SIMPLE_PLACE":
+            if (podium.slice(0, 3).some(p => p["idCheval"] === chevauxChoisis[0])) {
+                gains = mise * (podium[0]["cote"] / 2); 
+                pariGagne = true;
+            }
+            break;
+
+        case "COUPLE_GAGNANT":
+            if (chevauxChoisis.length === 2) {
+                const premierDeux = [podium[0]["idCheval"], podium[1]["idCheval"]];
+                if (chevauxChoisis.every(id => premierDeux.includes(id))) {
+                    gains = mise * (podium[0]["cote"] * podium[1]["cote"]); 
+                    pariGagne = true;
+                }
+            }
+            break;
+
+        case "COUPLE_PLACE":
+            if (chevauxChoisis.length === 2) {
+                const premiersTrois = [podium[0]["idCheval"], podium[1]["idCheval"], podium[2]["idCheval"]];
+                if (chevauxChoisis.every(id => premiersTrois.includes(id))) {
+                    gains = mise * (podium[0]["cote"] * podium[1]["cote"] / 2); 
+                    pariGagne = true;
+                }
+            }
+            break;
+
+        case "COUPLE_ORDRE":
+            if (chevauxChoisis.length === 2) {
+                if (podium[0]["idCheval"] === chevauxChoisis[0] && podium[1]["idCheval"] === chevauxChoisis[1]) {
+                    gains = mise * (podium[0]["cote"] * podium[1]["cote"] * 1.5); 
+                    pariGagne = true;
+                }
+            }
+            break;
+
+        case "TRIO_GAGNANT":
+            if (chevauxChoisis.length === 3) {
+                const premiersTrois = [podium[0]["idCheval"], podium[1]["idCheval"], podium[2]["idCheval"]];
+                if (chevauxChoisis.every(id => premiersTrois.includes(id))) {
+                    gains = mise * (podium[0]["cote"] * podium[1]["cote"] * podium[2]["cote"]); 
+                    pariGagne = true;
+                }
+            }
+            break;
+
+        default:
+            linkContenuFinCourse.innerHTML += "\n Type de pari inconnu.";
+            break;
+    }
+
+    if (pariGagne) {
+        joueur["argent"] += gains;
+        joueur["nbPartiesGagnees"] += 1;
+        joueur["gainsGeneres"] += gains - mise;
+
+        linkContenuFinCourse.innerHTML += "\n Bravo vous avez remporté votre pari ! <br>Votre cagnote s'élève maintenant à " + joueur["argent"].toFixed(2) + " euros/jetons/cequetuveux";
+    } else if (typePari !== undefined) {
+        linkContenuFinCourse.innerHTML += "\n Perdu ! Vous pouvez toujours recommencer... (Tous les perdants s'arrêtent avant de gagner)";
+    }
+
+    majJoueur(joueur);
+    document.getElementById("popupFinCourse").style.display = "block";
+    document.getElementById("retour").style.display = "block";
+
+    document.getElementById("fermerFinCourse").addEventListener("click", function() {
+        document.getElementById("popupFinCourse").style.display = "none";
+    });
+}
+
+
+/* function finDeLaCourse(){
     joueur["nbPartiesJouees"]+=1;
     linkContenuFinCourse.innerHTML="<div>Classement</div>" + linkAffichageClassement.innerHTML;
 
@@ -179,7 +268,7 @@ function finDeLaCourse(){
     document.getElementById("fermerFinCourse").addEventListener("click", function() {
         document.getElementById("popupFinCourse").style.display = "none";
     });
-}
+} */
 
 function majJoueur(joueur){
     fetch("http://localhost:8080/courses/hippiques/joueur/saveJoueur",{
