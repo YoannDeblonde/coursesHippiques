@@ -60,7 +60,6 @@ async function lancerFetchsEnOrdre(idCourse, idJoueur) {
 }
 function recupererJoueur(data){
     joueur = data;
-    console.log(data);
     pari = data["pari"];
 }
 function recupererPodium(data){
@@ -80,6 +79,7 @@ let dataStock;
 
 function recupererDonneesChevaux(data){
     dataStock = data;
+    console.log(data["listeCheval"]);
     linkTitre.innerHTML = data["nomCourse"];
     linkMeteo.innerHTML = data["terrain"]["meteoEvenement"];
     linkNbTour.innerHTML = data["nbTours"];
@@ -117,6 +117,7 @@ function recupererDonneesChevaux(data){
 }
 
 function course(data,initialisation){
+    linkAffichageClassement.innerHTML = "";
     for (let i = 0; i < nbParticipants; i++){
         let tempsRealise = data["listeCheval"][i]["tempsRealise"];
         let dernierTemps = data["listeCheval"][i]["dernierTemps"];
