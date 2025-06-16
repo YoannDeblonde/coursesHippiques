@@ -61,7 +61,7 @@ function setChoixCheval(){
                 </div>`;
                 setTimeout(() => {
                     const checkbox = document.getElementById(idChevalChoix);
-                    checkbox.addEventListener("change", function () {
+                    checkbox.addEventListener("click", function () {
                         if (this.checked) {
                             if (!ordreSelection.includes(this.value)) {
                                 ordreSelection.push(this.value);
@@ -141,6 +141,7 @@ function recuperationPari(event) {
     })
     .then(data => {
         console.log("Pari sauvegardé !", data);
+        sessionStorage.setItem("ListeChevauxOrdre", JSON.stringify(chevauxChoisis));
         window.location.href = "pageCourse.html";
     })
     .catch(err => console.error("Erreur connexion :", err.message));
