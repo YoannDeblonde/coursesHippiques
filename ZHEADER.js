@@ -1,7 +1,9 @@
 let coursesData = []; 
 
-function selectCourse(idCourseAffichage) {
-  let idCourse = document.getElementById("selectedCourse").value 
+function selectCourse(numCourse) {
+  document.getElementById(numCourse);
+  console.log(document.getElementById(numCourse));
+  let idCourse = document.getElementById(numCourse).innerHTML;
   sessionStorage.setItem("idCourse", idCourse);
   document.getElementById("nomCourse").innerHTML = "<h4> Course n°"+ idCourse +" choisie </h4>";
   showSetPari(); // Si tu veux garder l’appel existant
@@ -41,12 +43,12 @@ function afficherCourses() {
         const course = data[i];
         const infosDiv = document.getElementById(`infosCourse${i + 1}`);
         infosDiv.innerHTML = ""; 
-        console.log(course["id"]);
-        infosDiv.value = course["id"];
+        
+        let newSpan ="<span id=\"numCourse"+(i+1)+"\">"+ course["id"] + "</span>";
 
         const header = document.createElement("div");
         header.className = "course-header";
-        header.innerHTML = `
+        header.innerHTML = newSpan + `
         <h3>Course n° ${i + 1}</h3>
         <p><strong>Terrain :</strong> ${course.terrain.nomTerrain}</p>
         <p><strong>Type de terrain :</strong> ${course.terrain.typeDeTerrain}</p>
