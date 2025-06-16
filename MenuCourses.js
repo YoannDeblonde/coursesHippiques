@@ -43,9 +43,9 @@ let info = document.getElementById("InfoBut")
 
 let distributeur = document.getElementById("DistributeurBut")
     if (distributeur) {
-        distributeur.addEventListener("click", function (event) {
+        distributeur.addEventListener("click", function () {
             event.preventDefault();
-            enTravaux();
+            window.location.href = "Distributeur.html";
     });
     }
 
