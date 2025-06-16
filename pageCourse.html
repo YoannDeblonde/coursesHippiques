@@ -8,11 +8,11 @@
     <div id="titre">Exemple de titre</div>
     <div class="premierBloc">
         <div id="infoCourse">
-            <h4>Information Course</h4>
             <ul>
+                <li><h4>Information Course</h4></li>
                 <li><strong>Météo :</strong> <span id="meteo"></span> </li>
                 <li><strong>Nombre de tours :</strong> <span id="nbTour">0</span> </li>
-                <li><strong>Longueur d'un tour :</strong> <span id="longueur">0</span> </li>
+                <li><strong>Longueur d'un tour :</strong> <span id="longueur">0</span> m </li>
                 <li><strong>Cheval avec la meilleure Vmax :</strong>
                     <span id="nomChevalVmax">d</span> 
                     <span id="chevalVmax">0</span> km/h
@@ -22,23 +22,26 @@
                     <span id="chevalAcceleration">0</span>
                 </li>
                 <li><strong>Type de terrain :</strong> <span id="typeDeTerrain"></span> </li>
+                <li><button id="lancementCourse" >Lancer Course</button></li>
             </ul>
-            <button id="lancementCourse" >Lancer Course</button>
         </div>
         
         <div id="course" style="transform: scale(0.9); transform-origin: top left;">
             <div class = "ARRIVEE" id="ligneArrivee"></div>
             <div id="affichageCourse" ></div>
         </div>
+
         <div class="deuxiemeBloc">
-            <div id="affichageClassement"><h4>Classement</h4></div> 
-            <div id="resultatCourse" style="display:none;"><h4> </h4></div>
+            <div style="font-weight: bold;">Classement</div>
+            <div id="affichageClassement"></div> 
             <div id="Navigation">
             <div id="retour" style="display:none;">
-                <a href="MenuCourses.html" title="Accueil"><button id="retourBut"> Retour </button></a>
+                <a href="ZHEADER.html" title="Accueil"><button id="retourBut"> Retour </button></a>
 	        </div>
         </div>
+
     </div>
+
     <div id="popupFinCourse" class="popup-finCourse" style="display:none;">
         <div class="popup-contenu">
             <span id="fermerFinCourse" class="fermer">&times;</span>

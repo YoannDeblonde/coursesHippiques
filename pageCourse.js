@@ -76,7 +76,6 @@ let nbTours;
 let longueur;
 let meteoEvenment;
 let dataStock;
-let finCourse = false;
 
 function recupererDonneesChevaux(data){
     dataStock = data;
@@ -142,12 +141,8 @@ function course(data,initialisation){
             }
             setTimeout(function(){
                 nbChevauxFinis++;
-                linkAffichageClassement.innerHTML += nom + " : " + dernierTemps.toFixed(2) +" sec" + "<br>" ;
-                if (!finCourse){
-                    linkResultatCourse.style.display = "";
-                    linkResultatCourse.innerHTML = "Le cheval gagnant est " + nom ;
-                    finCourse = true;
-                };
+                linkAffichageClassement.innerHTML += "<li> <span>"+nom + " : </span>" + dernierTemps.toFixed(2) +" sec" + "</li>" ;
+                console.log(linkAffichageClassement.innerHTML)
                 if (nbChevauxFinis == nbParticipants){
                     finDeLaCourse();
                 }
@@ -160,7 +155,7 @@ function course(data,initialisation){
 
 function finDeLaCourse(){
     joueur["nbPartiesJouees"]+=1;
-    linkContenuFinCourse.innerHTML=linkAffichageClassement.innerHTML;
+    linkContenuFinCourse.innerHTML="<div>Classement</div>" + linkAffichageClassement.innerHTML;
 
 
     let idChevalPari = pari["chevalChoisi"][0]["idCheval"];
@@ -218,6 +213,5 @@ function majCheval(lienCheval, distanceParcourue,i)
 }
 
 linkBoutonCourse.addEventListener("click",function(){
-    linkAffichageClassement.innerHTML = "<h4>Classement</h4>";
     course(dataStock,false);
 });

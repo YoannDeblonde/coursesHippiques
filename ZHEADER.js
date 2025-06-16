@@ -49,7 +49,7 @@ function afficherCourses() {
         const header = document.createElement("div");
         header.className = "course-header";
         header.innerHTML = newSpan + `
-        <h3>Course n° ${i + 1}</h3>
+        <h3>Course n° ${course["id"] }</h3>
         <p><strong>Terrain :</strong> ${course.terrain.nomTerrain}</p>
         <p><strong>Type de terrain :</strong> ${course.terrain.typeDeTerrain}</p>
         <p><strong>Météo :</strong> ${course.terrain.meteoEvenement}</p>
@@ -107,20 +107,13 @@ let deconnexion = document.getElementById("SaveAndQuitBut")
 });
 
 let info = document.getElementById("InfoBut")
-    if (info) {
+if (info) {
         info.addEventListener("click", function (event) {
             event.preventDefault();
             afficherProfil();
     });
-    }
+}
 
-let distributeur = document.getElementById("DistributeurBut")
-    if (distributeur) {
-        distributeur.addEventListener("click", function (event) {
-            event.preventDefault();
-            enTravaux();
-    });
-    }
 
 let bar = document.getElementById("BarBut")
     if (bar) {
