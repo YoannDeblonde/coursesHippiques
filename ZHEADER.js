@@ -20,18 +20,28 @@ function showAffichageSubmit(){
 
 function main() {
   afficherCourses();
-  document.getElementById("affichageSubmit").addEventListener("click",validerChoix);
+  const butValiderChoix = document.getElementById("affichageSubmit");
+
+  if (butValiderChoix) {
+    butValiderChoix.addEventListener("click", function(event) {
+        event.preventDefault(); // empêcher le submit/rechargement
+        validerChoix();
+    });
+  }
 }
 
-function validerChoix(){
+function validerChoix() {
   let choix = document.getElementsByName("choixPari");
-    for (c of choix){
-      if (c.checked){
-        sessionStorage.setItem("typePari", c.value);
-        window.location.href = "Paris.html";
-      }
+  for (const c of choix) {
+    if (c.checked) {
+      sessionStorage.setItem("Type de paris", c.value); // clé identique partout
+      window.location.href = "Paris.html";
+      return; // sortir après redirection pour éviter boucle
     }
+  }
+  alert("Veuillez sélectionner un type de pari.");
 }
+
 
 
 function afficherCourses() {
