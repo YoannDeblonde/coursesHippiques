@@ -58,7 +58,7 @@ function tentativeConnexion(event) {
         sessionStorage.setItem("id", id);
         sessionStorage.setItem("pseudo", pseudo);
         console.log("Joueur connecté :", username, "(ID :", id, ")");
-        window.location.href = "MenuCourses.html";
+        window.location.href = "ZHEADER.html";
 
     })
     .catch(err => console.error("Erreur connexion :", err.message));

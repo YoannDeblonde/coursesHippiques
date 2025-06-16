@@ -16,7 +16,7 @@
       <ul>
         <li>
             <div id="ModifProfile">
-                <a href="ModifProfile.html" title="Profil"><button id="ModifProfileBut"> Modifier Profil </button></a>
+                <a href="ModifProfile.html"> <button id="ModifProfileBut"> Modifier Profil </button></a>
 	        </div>
         </li>
         <li>
@@ -28,67 +28,76 @@
     </nav>
   </header>
 
-  <body>
-    <div id="listeDesCourse">
-		<t2>Liste des courses : </t2>
-		<div id="ParisSimple">
-             <a href="ListeCourses.html" title="Paris simple"><button id="ParisSimpleBut">Paris simple</button></a>
-	    </div>
-        
-        <div id="ParisPlat">
-             <a href=".html" title="Paris plat"><button id="ParisPlatBut">Paris sur Plat</button></a>
-	    </div>
+    <div id="listeCourses">
 
-        <div id="ParisTrot">
-             <a href=".html" title="Paris trot"><button id="ParisTrotBut">Paris sur Trot</button></a>
-	    </div>
-        
-        <div id="ParisObstacle">
-             <a href=".html" title="Paris Obstacle"><button id="ParisObstacleBut">Paris Obstacle</button></a>
-	    </div>
-	</div>
+		  <div class="course-card" onclick="selectCourse('idCourse1')">
+        <ol id="infosCourse1"></ol>
+      </div>
+      <div class="course-card" onclick="selectCourse('idCourse2')">
+        <ol id="infosCourse2"></ol>
+      </div>
+      <div class="course-card" onclick="selectCourse('idCourse3')">
+        <ol id="infosCourse3"></ol>
+      </div>
+      <input type="hidden" id="selectedCourse" name="choixCourse" />
 
-    <div id="Divers">
-		<t2>Divers : </t2>
-		<div id="Info">
-             <a href="" title="Info"><button id="InfoBut">Informations</button></a>
-	    </div>
+       <div>
+         <div id="nomCourse"><h4>Aucune course de choisie</h4></div>
+         <div id="setPari" style="display: none;">
+        Type de pari
+        <fieldset id="choixPari">
+          <div><label for="idPariSimple"></label><input type="radio" name="choixPari"  value="SIMPLE" id="idPariSimple" onclick="showAffichageSubmit()">Pari Simple</div>
+          <div><label for="idPariSimplePlace"></label><input type="radio" name="choixPari"  value="SIMPLE_PLACE" id="idPariSimplePlace" onclick="showAffichageSubmit()">Pari Simple Place</div>
+          <div><label for="idPariCoupleGagnant"></label><input type="radio" name="choixPari"  value="COUPLE_GAGNANT" id="idPariCoupleGagnant" onclick="showAffichageSubmit()">Pari Couple Gagnant</div>
+          <div><label for="idPariCouplePlace"></label><input type="radio" name="choixPari"  value="COUPLE_PLACE" id="idPariCouplePlace" onclick="showAffichageSubmit()">Pari Couple Place</div>
+          <div><label for="idPariCoupleOrdre"></label><input type="radio" name="choixPari"  value="COUPLE_ORDRE" id="idPariCoupleOrdre" onclick="showAffichageSubmit()">Pari Couple Ordre</div>
+          <div><label for="idPariTrioGagnant"></label><input type="radio" name="choixPari"  value="TRIO_GAGNANT" id="idPariTrioGagnant" onclick="showAffichageSubmit()">Pari Trio Gagnant</div>
+        </fieldset>
+        </div>
+        <button type="submit" id="affichageSubmit" style="display: none;">Valider</button>
 
+       </div>
+    </div>
+         
+
+
+      <div id="Divers">
+        <div id="Info">
+            <a href="" title="Info"><button id="InfoBut">Informations</button></a>
+        </div>
         <div id="Distributeur">
-             <a href="" title="Distributeur"><button id="DistributeurBut">Distributeur</button></a>
-	    </div>
-        
+           <a href="" title="Distributeur"><button id="DistributeurBut">Distributeur</button></a>
+        </div>
         <div id="Bar">
-             <a href="" title="Bar"><button id="BarBut">bar</button></a>
-	    </div>
-
+            <a href="" title="Bar"><button id="BarBut">bar</button></a>
+        </div>
         <div id="Stats">
-             <a href="" title="Stats"><button id="StatsBut">Stats perso</button></a>
-	    </div>
-	</div>
+            <a href="" title="Stats"><button id="StatsBut">Stats perso</button></a>
+        </div>
+      </div>
 
-    <div id="popupBienvenue" class="popup-success">
-  <div class="popup-contenu">
-    <span id="fermerBienvenue" class="fermer">&times;</span>
-    <p id="messageBienvenuePopup">Bienvenue !</p>
+  <div id="popupBienvenue" class="popup-success">
+    <div class="popup-contenu">
+      <span id="fermerBienvenue" class="fermer">&times;</span>
+      <p id="messageBienvenuePopup">Bienvenue !</p>
+    </div>
   </div>
-</div>
 
-<div id="popupErreur" class="popup-erreur">
-  <div class="popup-contenu">
-    <span id="fermerErreur" class="fermer">&times;</span>
-    <p id="messageErreurPopup">Erreur</p>
+  <div id="popupErreur" class="popup-erreur">
+    <div class="popup-contenu">
+      <span id="fermerErreur" class="fermer">&times;</span>
+      <p id="messageErreurPopup">Erreur</p>
+    </div>
   </div>
-</div>
 
-<div id="popupProfil" class="popup-profil" style="display:none;">
-  <div class="popup-contenu">
-    <span id="fermerProfil" class="fermer">&times;</span>
-    <div id="contenuProfil"></div>
+  <div id="popupProfil" class="popup-profil" style="display:none;">
+    <div class="popup-contenu">
+      <span id="fermerProfil" class="fermer">&times;</span>
+      <div id="contenuProfil"></div>
+    </div>
   </div>
-</div>
 
-</body></html>
+  <script src="ZHEADER.js"></script>
 
 </body>
 </html>

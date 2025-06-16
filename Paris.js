@@ -1,6 +1,7 @@
 let linkChoixChevalPari = document.getElementById("choixChevalParis");
 let argent
 let id = sessionStorage.getItem("id");
+
 fetch("http://localhost:8080/courses/hippiques/joueur/affichageprofil2",{
     method:"POST",
     headers:{"Content-Type":"application/json"
