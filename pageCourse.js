@@ -60,6 +60,7 @@ async function lancerFetchsEnOrdre(idCourse, idJoueur) {
 }
 function recupererJoueur(data){
     joueur = data;
+    console.log(data);
     pari = data["pari"];
 }
 function recupererPodium(data){
@@ -142,7 +143,6 @@ function course(data,initialisation){
             setTimeout(function(){
                 nbChevauxFinis++;
                 linkAffichageClassement.innerHTML += "<li> <span>"+nom + " : </span>" + dernierTemps.toFixed(2) +" sec" + "</li>" ;
-                console.log(linkAffichageClassement.innerHTML)
                 if (nbChevauxFinis == nbParticipants){
                     finDeLaCourse();
                 }
