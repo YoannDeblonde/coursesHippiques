@@ -159,7 +159,9 @@ function finDeLaCourse(){
     linkContenuFinCourse.innerHTML ="<div style=\"font-weight: bold;\">Classement</div>" + linkAffichageClassement.innerHTML;
 
     const typePari = pari["typePari"];
-    const chevauxChoisis = pari["chevalChoisi"].map(c => c["idCheval"]);
+    /* const chevauxChoisis = pari["chevalChoisi"].map(c => c["idCheval"]); */
+    let chevauxChoisis = JSON.parse(sessionStorage.getItem("ListeChevauxOrdre"));
+    chevauxChoisis = chevauxChoisis.map(Number);
     const mise = pari["mise"];
     let pariGagne = false;
     let gains = 0;
@@ -200,6 +202,8 @@ function finDeLaCourse(){
             break;
 
         case "COUPLE_ORDRE":
+            console.log(chevauxChoisis);
+            console.log(podium);
             if (chevauxChoisis.length === 2) {
                 if (podium[0]["idCheval"] === chevauxChoisis[0] && podium[1]["idCheval"] === chevauxChoisis[1]) {
                     gains = mise * (podium[0]["cote"] * podium[1]["cote"] * 1.5); 
