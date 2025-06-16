@@ -35,6 +35,7 @@ function setChoixCheval(){
     
         
         let listeCheval = data["listeCheval"];
+        console.log(listeCheval);
         let nbParticipants = data["nbParticipants"];
         for (let i=0;i<nbParticipants;i++){
             let idChevalChoix = "cheval"+i;
@@ -76,13 +77,14 @@ function setChoixCheval(){
             }
             
         };
-
+        console.log(listeCheval);
         let recupPari = document.getElementById("formParis")
         recupPari.addEventListener("submit", function (event) {
                 event.preventDefault();
                 console.log("test lancement");
                 recuperationPari(event);
         });
+        console.log(listeCheval);
     })
     .catch(err => console.log(err));
 }
@@ -95,7 +97,6 @@ function recuperationPari(event) {
     let mise = parseFloat(form.elements["mise"].value);
     let typePari = sessionStorage.getItem("Type de paris");
     let chevauxChoisis = Array.from(document.querySelectorAll("input[name='choix']:checked")).map(e => e.value);
-    console.log(chevauxChoisis);
 
     if (mise > argent || mise <= 0 || isNaN(mise)) {
         return afficherPopupErreur("Mise invalide.");

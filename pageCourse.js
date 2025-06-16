@@ -60,7 +60,6 @@ async function lancerFetchsEnOrdre(idCourse, idJoueur) {
 }
 function recupererJoueur(data){
     joueur = data;
-    console.log(data);
     pari = data["pari"];
 }
 function recupererPodium(data){
@@ -80,6 +79,7 @@ let dataStock;
 
 function recupererDonneesChevaux(data){
     dataStock = data;
+    console.log(data["listeCheval"]);
     linkTitre.innerHTML = data["nomCourse"];
     linkMeteo.innerHTML = data["terrain"]["meteoEvenement"];
     linkNbTour.innerHTML = data["nbTours"];
@@ -117,6 +117,7 @@ function recupererDonneesChevaux(data){
 }
 
 function course(data,initialisation){
+    linkAffichageClassement.innerHTML = "";
     for (let i = 0; i < nbParticipants; i++){
         let tempsRealise = data["listeCheval"][i]["tempsRealise"];
         let dernierTemps = data["listeCheval"][i]["dernierTemps"];
@@ -125,7 +126,7 @@ function course(data,initialisation){
 
         if (data["listeCheval"][i]["vitesseMax"] > linkChevalVmax.innerHTML ){
             linkNomChevalVmax.innerHTML = nom;
-            linkChevalVmax.innerHTML = data["listeCheval"][i]["vitesseMax"];
+            linkChevalVmax.innerHTML = data["listeCheval"][i]["vitesseMax"].toFixed(2);
         }
 
         if (data["listeCheval"][i]["acceleration"] > linkChevalAcceleration.innerHTML ){
@@ -155,7 +156,7 @@ function course(data,initialisation){
 
 function finDeLaCourse(){
     joueur["nbPartiesJouees"] += 1;
-    linkContenuFinCourse.innerHTML = linkAffichageClassement.innerHTML;
+    linkContenuFinCourse.innerHTML ="<div style=\"font-weight: bold;\">Classement</div>" + linkAffichageClassement.innerHTML;
 
     const typePari = pari["typePari"];
     /* const chevauxChoisis = pari["chevalChoisi"].map(c => c["idCheval"]); */
@@ -231,7 +232,7 @@ function finDeLaCourse(){
         joueur["nbPartiesGagnees"] += 1;
         joueur["gainsGeneres"] += gains - mise;
 
-        linkContenuFinCourse.innerHTML += "\n Bravo vous avez remporté votre pari ! <br>Votre cagnote s'élève maintenant à " + joueur["argent"].toFixed(2) + " euros/jetons/cequetuveux";
+        linkContenuFinCourse.innerHTML += "\n Bravo vous avez remporté votre pari (soit "+gains.toFixed(2)+" €) ! <br>Votre cagnote s'élève maintenant à " + joueur["argent"].toFixed(2) + " €";
     } else if (typePari !== undefined) {
         linkContenuFinCourse.innerHTML += "\n Perdu ! Vous pouvez toujours recommencer... (Tous les perdants s'arrêtent avant de gagner)";
     }
