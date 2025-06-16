@@ -44,9 +44,10 @@ function setChoixCheval(){
             let nomCheval = listeCheval[i]["nom"];
 
             if (typeParis === "SIMPLE" || typeParis === "SIMPLE_PLACE") {
-                linkChoixChevalPari.innerHTML += "<div>" + "<input type=\"radio\" name=\"choix\"  value=\""+idCheval+"\" id=\""+idChevalChoix+"\">+<label for=\""+idChevalChoix+"\">"+nomCheval+"; cote = "+coteCheval +"</label>"+ "</div>"
+                linkChoixChevalPari.innerHTML += "<div><input type=\"radio\" name=\"choix\"  value=\""+idCheval+"\" id=\""+
+                idChevalChoix+"\">+<label for=\""+idChevalChoix+"\">"+
+                nomCheval+"; cote = "+coteCheval +"</label>"+ "</div>"
             }
-
             else if (
                 typeParis === "COUPLE_GAGNANT" || 
                 typeParis === "COUPLE_PLACE" || 
@@ -189,7 +190,7 @@ function recuperationPari(event) {
     messageElem.textContent = message;
     popup.style.display = "block";
 
-    document.getElementById("fermerErreur").onclick = () => {
+    document.getElementById("fermerPopup").onclick = () => {
         popup.style.display = "none";
     };
 
